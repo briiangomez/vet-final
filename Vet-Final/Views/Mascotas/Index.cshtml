@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Vet_Data.Models.Mascota>
+@{
+    ViewBag.Title = "Mascotas";
+}
+
+<h2>Mascotas</h2>
+
+<p>
+    @Html.ActionLink("Nueva Mascota", "Create")
+</p>
+<table border="1">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Fecha de Nacimiento
+        </th>
+        <th>
+            Propietario
+        </th>
+        <th>
+            Raza
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Raza.Descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+

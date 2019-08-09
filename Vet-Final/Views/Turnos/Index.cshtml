@@ -1,0 +1,29 @@
+﻿@*@model IEnumerable<Vet_Core.ViewModels.TurnoVM>*@
+
+@{
+    ViewBag.Title = "Turnos";
+}
+
+<h2>Turnos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Turno", "Create")
+</p>
+<div id="calendar" class="calendar">
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src='http://fullcalendar.io/js/fullcalendar-3.4.0/lib/moment.min.js'></script>
+<script src='http://fullcalendar.io/js/fullcalendar-3.4.0/lib/jquery.min.js'></script>
+<script src="http://fullcalendar.io/js/fullcalendar-3.4.0/lib/jquery-ui.custom.min.js"></script>
+<script src='http://fullcalendar.io/js/fullcalendar-3.4.0/fullcalendar.min.js'></script>
+@Scripts.Render("~/Content/calendar/dist/locale/es.js")
+<script src="~/Content/js/Turnos.js"></script>
+
+}

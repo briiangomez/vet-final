@@ -1,0 +1,29 @@
+﻿@model Vet_Data.Models.Mascota
+
+@{
+    ViewBag.Title = "Eliminar Mascota";
+}
+
+<div class="form">
+
+    <h2>Eliminar Mascota</h2>
+
+    <form action="/Mascotas/Delete" method="post">
+        <input type="hidden" value="@Model.ID" name="id" />
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" disabled value="@Model.Nombre">
+        </p>
+        <p>
+            <label>Fecha de Nacimiento</label><br>
+            <input type="text" disabled name="FechaNacimiento" value="@Model.FechaNacimiento">
+        </p>
+        <p>
+            <input class="button" type="submit" value="Eliminar" />
+        </p>
+    </form>
+
+
+</div>
+
+

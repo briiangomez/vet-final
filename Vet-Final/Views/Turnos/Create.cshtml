@@ -1,0 +1,69 @@
+﻿@model Vet_Core.ViewModels.TurnoVM
+
+@{
+    ViewBag.Title = "Crear Turno";
+}
+
+<div class="form">
+
+    <h2>Crear Turno</h2>
+
+    <form action="/Turnos/Create" method="post">
+        <p>
+            <label>Cliente</label><br>
+            <input type="hidden" name="ClienteId" id="ClienteId" />
+            <input type="text" id="txtCliente">
+        </p>
+        <p>
+            <label>Mascota</label><br>
+            @Html.DropDownListFor(model => model.MascotaId, Enumerable.Empty<SelectListItem>(),
+                "Seleccione Mascota....", new { @id = "MascotaId" })            
+            @Html.ValidationMessageFor(model => model.MascotaId, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <label>Especialidad</label><br>
+            @Html.DropDownList("EspecialidadId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EspecialidadId, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <label>Medico </label><br>
+            <input type="hidden" name="MedicoId" id="MedicoId" />
+            <input type="text" id="txtMedico">
+            @Html.ValidationMessageFor(model => model.MedicoId, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Sala</label><br>
+            @Html.DropDownList("SalaId", null, htmlAttributes: new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.SalaId, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <label>Servicio</label><br>
+            @Html.DropDownList("ItemId", null, htmlAttributes: new { @class = "form-control" })
+
+            @Html.ValidationMessageFor(model => model.ItemId, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <label>Fecha</label><br>
+            <input type="text" class="fechaT" id="FechaId">
+        </p>
+        <p>
+            <label>Hora</label><br>
+            @Html.DropDownListFor(model => model.Fecha, Enumerable.Empty<SelectListItem>(), "Seleccione Horario", null)
+            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            <input class="button" type="submit" value="Agregar" />
+        </p>
+    </form>
+
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Content/js/CreateTurno.js"></script>
+
+}

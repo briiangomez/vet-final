@@ -1,0 +1,28 @@
+﻿@model Vet_Data.Models.Item
+
+@{
+    ViewBag.Title = "Eliminar Item";
+}
+
+<div class="form">
+
+    <h2>Eliminar Item</h2>
+
+    <form action="/Items/Delete" method="post">
+        <input type="hidden" name="id" value="@Model.ID" />
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" disabled value="@Model.Descripcion">
+        </p>
+        <p>
+            <label>Valor</label><br>
+            <input type="number" disabled value="@Model.Valor">
+        </p>
+        <p>
+            <input class="button" type="submit" value="Eliminar" />
+        </p>
+    </form>
+
+
+</div>
+

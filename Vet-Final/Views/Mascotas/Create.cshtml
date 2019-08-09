@@ -1,0 +1,53 @@
+﻿@model Vet_Data.Models.Mascota
+
+@{
+    ViewBag.Title = "Crear Mascota";
+}
+
+<div class="form">
+
+    <h2>Crear Mascota</h2>
+
+    <form action="/Mascotas/Create" method="post" enctype = "multipart/form-data">
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" name="Nombre" required>
+        </p>
+        <p>
+            <label>Fecha de Nacimiento</label><br>
+            <input type="text" class="fecha" name="FechaNacimiento">
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <label>Cliente</label><br>
+            <input type="hidden" name="ClienteId" id="ClienteId" />
+            <input type="text" id="txtCliente">
+            @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Raza </label><br>
+            <input type="hidden" name="RazaId" id="RazaId" />
+            <input type="text" id="txtRaza">
+            @Html.ValidationMessageFor(model => model.RazaId, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Foto</label>
+            <input type="file" name="imagen" id="imagen" />
+            @Html.ValidationMessageFor(model => model.imagen, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <input class="button" type="submit" value="Agregar" />
+        </p>
+    </form>
+
+
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

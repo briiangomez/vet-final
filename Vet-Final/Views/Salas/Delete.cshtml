@@ -1,0 +1,29 @@
+﻿@model Vet_Data.Models.Sala
+
+@{
+    ViewBag.Title = "Editar Sala";
+}
+
+<div class="form">
+
+    <h2>Editar Sala</h2>
+
+    <form action="/Salas/Delete" method="post">
+        <input type="hidden" name="id" value="@Model.ID" />
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" name="Nombre" value="@Model.Nombre" disabled>
+
+        </p>
+        <p>
+            <label>Ubicacion</label><br>
+            <input type="text" name="Locacion" value="@Model.Locacion" disabled>
+
+        </p>
+        <p>
+            <input class="button" type="submit" value="Eliminar" />
+        </p>
+    </form>
+
+
+</div>

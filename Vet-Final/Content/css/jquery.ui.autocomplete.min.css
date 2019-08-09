@@ -1,0 +1,48 @@
+/*! jQuery UI - v1.10.4 - 2014-01-17
+* http://jqueryui.com
+* Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
+
+/*.ui-autocomplete{position:absolute;top:0;left:0;cursor:default}*/
+
+div.ac_results ul {
+margin:0;
+padding:0;
+list-style-type:none;
+border: solid 1px #ccc;
+}
+div.ac_results ul li {
+font-family: Arial, Verdana, Sans-Serif;
+font-size: 12px;
+margin: 1px;
+padding: 3px;
+cursor: pointer;
+}
+div.ac_results ul li.ac_over {
+background-color: #acf;
+}
+
+.ui-autocomplete { 
+    margin:0;
+    padding:0;
+    list-style-type:none; // gets rid of the bullet points
+    border: solid 1px #ccc;
+    background-color: #fff; // provides a background for the autocomplete returned items
+    width: 500px; // it was necessary for me to set the width
+}
+
+.ui-autocomplete li {
+    font-family: Arial, Verdana, Sans-Serif;
+    margin: 1px;
+    cursor: pointer;
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+}
+
+// to distinctly see which returned item is selected/hovered over
+.ui-autocomplete .ui-state-focus { background-color: #d74b4b; } 
+
+// to hide the lower left text
+.ui-helper-hidden-accessible { display:none; }

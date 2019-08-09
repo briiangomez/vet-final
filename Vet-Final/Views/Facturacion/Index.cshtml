@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Vet_Data.Models.Factura>
+@{
+    ViewBag.Title = "Facturas";
+}
+
+<h2>Facturas</h2>
+
+<table border="1">
+    <tr>
+        <th>
+            Cliente
+        </th>
+        <th>
+            Letra
+        </th>
+        <th>
+            Numero
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th>
+            Total
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LetraFactura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Importe)
+            </td>
+            <td>
+                @Html.ActionLink("Detalles", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Generar PDF", "GeneratePDF", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
+

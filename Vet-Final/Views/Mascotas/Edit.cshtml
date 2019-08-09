@@ -1,0 +1,53 @@
+﻿@model Vet_Data.Models.Mascota
+
+
+@{
+    ViewBag.Title = "Editar Mascota";
+}
+
+<div class="form">
+
+    <h2>Editar Mascota</h2>
+
+    <form action="/Mascotas/Edit" method="post" enctype = "multipart/form-data">
+        <input type="hidden" value="@Model.ID" name="ID" />
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" name="Nombre" value="@Model.Nombre">
+        </p>
+        <p>
+            <label>Fecha de Nacimiento</label><br>
+            <input type="text" class="fecha" name="FechaNacimiento"  value="@Model.FechaNacimiento">
+        </p>
+        <p>
+            <label>Cliente</label><br>
+            <input type="hidden" name="ClienteId" id="ClienteId" value="@Model.ClienteId" />
+            <input type="text" id="txtCliente" value="@Model.Cliente.NombreCompleto">
+        </p>
+        <p>
+            <label>Raza </label><br>
+            <input type="hidden" name="RazaId" id="RazaId" value="@Model.RazaId" />
+            <input type="text" id="txtRaza" value="@Model.Raza.Descripcion">
+        </p>
+        <p>
+            <label>Foto Actual</label><br />
+            <img src="@Model.Foto" width="120" height="120" />
+        </p>
+        <p>
+            <label>Foto</label>
+            <input type="file" name="imagen" id="imagen" />
+        </p>
+        <p>
+            <input class="button" type="submit" value="Editar" />
+        </p>
+    </form>
+
+
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

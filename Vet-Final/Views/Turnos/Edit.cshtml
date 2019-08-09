@@ -1,0 +1,68 @@
+﻿@model Vet_Core.ViewModels.TurnoVM
+@using Vet_Data.Models;
+@using Vet_BLL;
+@{
+    ViewBag.Title = "Reprogramar Turno";
+    var turno = new TurnoBLL().ObtenerTurno(Model.ID);
+}
+
+<div class="form">
+
+    <h2>Reprogramar Turno</h2>
+
+    <form action="/Turnos/Edit" method="post">
+        <input type="hidden" value="@Model.ID" name="ID" />
+        <input type="hidden" value="@Model.EstadoId" name="EstadoId" />
+
+        <p>
+            <label>Mascota</label><br>
+            <input type="hidden" id="ClienteId" />
+            <input type="text" id="txtCliente" disabled value="@turno.Mascota.Nombre">
+        </p>
+        <p>
+            <label>Especialidad</label><br>
+            <input type="hidden"  name="EspecialidadId" id="EspecialidadId" value="@Model.EspecialidadId"/>
+            <input type="text" id="txtCliente" disabled value="@turno.Especialidad.Descripcion">
+        </p>
+        <p>
+            <label>Medico </label><br>
+            <input type="hidden" name="MedicoId" id="MedicoId" value="@Model.MedicoId" />
+            <input type="text" id="txtCliente" disabled value="@turno.Medico.NombreCompleto">
+        </p>
+        <p>
+            <label>Sala</label><br>
+            <input type="hidden" name="SalaId" id="SalaId" value="@Model.SalaId" />
+            <input type="text" id="txtCliente" disabled value="@turno.Sala.Nombre">
+        </p>
+        <p>
+            <label>Servicio</label><br>
+            <input type="hidden" name="ClienteId" id="ClienteId" />
+            <input type="text" id="txtCliente" disabled value="@turno.Item.Descripcion">
+        </p>
+        <p>
+            <label>Fecha Inicio</label><br>
+            <input type="hidden" name="ClienteId" id="ClienteId" />
+            <input type="text" id="txtCliente" disabled value="@Model.FechaInicio.ToString("dd/MM/yyyy HH:mm")">
+        </p>
+        <p>
+            <label>Fecha</label><br>
+            <input type="text" class="fechaT" id="FechaId">
+        </p>
+        <p>
+            <label>Hora</label><br>
+            @Html.DropDownListFor(model => model.Fecha, Enumerable.Empty<SelectListItem>(), "Seleccione Horario", null)
+            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+        </p>
+        <p>
+            <input class="button" type="submit" value="Reprogramar" />
+        </p>
+    </form>
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Content/js/CreateTurno.js"></script>
+
+}

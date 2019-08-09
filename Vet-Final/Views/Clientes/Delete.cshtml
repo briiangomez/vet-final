@@ -1,0 +1,48 @@
+﻿@model Vet_Core.ViewModels.ClienteVM
+
+@{
+    ViewBag.Title = "Eliminar Cliente";
+}
+
+<div class="form">
+
+    <h2>Eliminar Cliente</h2>
+
+    <form action="/Clientes/Delete" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" disabled value="@Model.Nombre">
+        </p>
+        <p>
+            <label>Apellido</label><br>
+            <input type="text" disabled value="@Model.Apellido">
+        </p>
+        <p>
+            <label>Fecha de Nacimiento</label><br>
+            <input type="text" class="fecha" disabled value="@Model.FechaNacimiento">
+        </p>
+        <p>
+            <label>Direccion</label><br>
+            <input type="text" disabled value="@Model.Direccion">
+        </p>
+        <p>
+            <label>Localidad</label><br>
+            <input type="text" disabled value="@Model.Localidad">
+        </p>
+        <p>
+            <label>Nro de Documento</label><br>
+            <input type="number" disabled name="NroDocumento" value="@Model.NroDocumento">
+        </p>
+        <p>
+            <input class="button" type="submit" value="Eliminar" />
+        </p>
+    </form>
+
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

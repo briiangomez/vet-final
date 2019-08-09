@@ -1,0 +1,143 @@
+﻿@model Vet_Data.Models.Medico
+@using Vet_Data.Models
+@{
+    ViewBag.Title = "Crear Medico";
+}
+
+<div class="form">
+
+    <h2>Crear Medico</h2>
+
+    <form action="/Medicos/Create" method="post">
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" name="Nombre" required>
+        </p>
+        <p>
+            <label>Apellido</label><br>
+            <input type="text" name="Apellido" required>
+        </p>
+        <p>
+            <label>Fecha de Nacimiento</label><br>
+            <input type="text" class="fecha" name="FechaNacimiento" required>
+        </p>
+        <p>
+            <label>Matricula</label><br>
+            <input type="number" name="Matricula" required>
+        </p>
+        <p>
+            <label>Nro de Documento</label><br>
+            <input type="number" name="NroDocumento" required>
+        </p>
+        <p>
+            <label>Especialidades</label><br />
+            <input type="hidden" value="" id="EspecialidadesIds" /> 
+            @Html.DropDownList("EspecialidadesList", null, "Seleccione Especialidad", htmlAttributes: new { @id = "EspecialidadId" })
+            <a class="button" href="#" onclick="agregarEspecialidad();">Agregar Especialidad</a>
+        </p>
+        <p>
+            <table border="1" id="ListEspecialidades">
+                <thead>
+                    <tr>
+                        <th>Especialidad</th>
+                        <th>Duracion</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="ListEspecialidadesBody"></tbody>
+            </table>
+        </p>
+        <p>
+            <label>Dias de Atencion</label><br />
+            <input type="hidden" value="" id="DiasIds" name="DiasIds" /> 
+            @Html.EnumDropDownListFor(model => model.dias, "Seleccione Dia", new { @id = "cmbDias" })
+            <a class="button" href="#" onclick="agregarHorarios();">Agregar Horario</a>
+        </p>
+        <p>
+            <table border="1" id="ListHorarios">
+                <thead>
+                    <tr>
+                        <th>Dias de Atencion</th>
+                    </tr>
+                </thead>
+                <tbody id="ListHorariosBody"></tbody>
+            </table>
+        </p>
+        <p>
+            <input class="button" type="submit" value="Agregar" />
+        </p>
+    </form>
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Content/js/Medicos.js"></script>
+} 
+<script language="javascript" type="text/javascript">
+        function agregarEspecialidad() {
+
+            var id = document.getElementById("EspecialidadId").value;
+            var name = $("#EspecialidadId option:selected").text();
+            var esta = false;
+            if (validarEspecialidad(id)) {
+                esta = true;
+            }
+            if (id == "") {
+                alert("Seleccione Especialidad");
+            }
+            else if (esta) {
+                alert("La especialidad seleccionada ya se encuentra cargada");
+            }
+            else {
+
+                        @{
+                            Model.Especialidades.Add(new MedicoEspecialidad());
+                        }
+
+                var indexEsp = $("#ListEspecialidadesBody").children("tr").length;
+                $("#ListEspecialidades > tbody").append("<tr id='" + id + "'  class='Especialidad'><td><input type='hidden' value='" + id + "' name ='Especialidades[" + indexEsp + "].EspecialidadID' />" + name + "</td><td><a href='#' class='borrar'>Eliminar</a></td></tr>");
+                document.getElementById("EspecialidadId").value = "";
+            }
+        }
+
+        function agregarHorarios() {
+
+            var dia = document.getElementById("cmbDias").value;
+            var nombreDia = $("#cmbDias option:selected").text();
+            //var datos = document.getElementById("DiasIds").value.split(';');
+            var esta = false;
+            if (validarHora(dia))
+            {
+                esta = true;
+            }
+            if (dia == "0") {
+                alert("Seleccione Dia");
+            }
+            else if (esta) {
+                alert("El dia seleccionado ya se encuentra cargada");
+            }
+            else {
+
+
+                        @{
+                            Model.Horarios.Add(new HorarioMedico());
+                        }
+                var indexHor = $("#ListHorariosBody").children("tr").length;
+                $("#ListHorarios > tbody").append("<tr id='" + dia + "'  class='Horarios'><td><input type='hidden' value='" + dia + "' name ='Horarios[" + indexHor + "].Dia' /><input type='hidden' value='" + "@(new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,8,0,0))" + "' name ='Horarios[" + indexHor + "].HoraDesde' /><input type='hidden' value='" + "@(new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,22,0,0))" + "' name ='Horarios[" + indexHor + "].HoraHasta' />" + nombreDia + "</td><td><a href='#' class='borrar'>Eliminar</a></td></tr>");
+                document.getElementById("Dia").value = "0";
+            }
+        }
+
+        $("#ListHorarios").on('click', '.borrar', function () {
+            $(this).parent().parent().remove();
+        });
+
+        $("#ListEspecialidades").on('click', '.borrar', function () {
+            $(this).parent().parent().remove();
+        });
+</script>
+
+
+

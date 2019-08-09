@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veterinaria - @ViewBag.Title</title>
+    <link href="~/Content/ui/css/base/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/Styles")
+    @Styles.Render("~/Content/calendar/dist/fullcalendar.css")
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Josefin+Sans%3A400i%2C700i&#038;ver=4.7.4' type='text/css' media='all' />
+    @Scripts.Render("~/Content/js/modernizr")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="topnav">
+            @Html.ActionLink("Home", "Index", "Home")
+            @Html.ActionLink("Clientes", "Index", "Clientes")
+            @Html.ActionLink("Mascotas", "Index", "Mascotas")
+            @Html.ActionLink("Medicos", "Index", "Medicos")
+            @Html.ActionLink("Items", "Index", "Items")
+            @Html.ActionLink("Salas", "Index", "Salas")
+            @Html.ActionLink("Turnos", "Index", "Turnos")
+            @Html.ActionLink("Facturas", "Index", "Facturacion")
+        </div>
+    </header>
+    <div class="containers">
+        <div class="jumbotron">
+            @RenderBody()
+        </div>
+        <div class="advertising">
+            <p>Publicidad</p>
+            <img src="~/Content/img/publicidad.png">
+        </div>
+    </div>
+    <div class="container-preloader">
+        <div class="preloader"></div>
+    </div>
+    
+    <footer class="footer">
+        <div class="link-footer container">
+            <nav class="nav-footer">
+                <ul>
+                    <li><a href="~/Home/About/">Nosotros</a></li>
+                    <li><a href="~/Home/Contact/">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                <a href="/">VET-LPPA &copy; @DateTime.Now.Year - Todos los Derechos Reservados</a>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Content/ui/js/jquery-ui-1.9.2.custom.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+        @Scripts.Render("~/Content/JavaScripts")
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+﻿@model Vet_Data.Models.Factura
+@using Vet_Data.Models
+@{
+    ViewBag.Title = "Crear Factura";
+}
+
+<div class="form">
+
+    <h2>Crear Factura</h2>
+
+    <form action="/Facturacion/Create" method="post">
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" value="@Model.Cliente.NombreCompleto" disabled>
+            <input type="hidden" name="ClienteId" value="@Model.Cliente.Id">
+            <input type="hidden" name="TurnoId" value="@Model.Turno.ID">
+        </p>
+        <p>
+            <label>DNI</label><br>
+            <input type="text" value="@Model.Cliente.NroDocumento" disabled>
+        </p>
+        <p>
+            <label>Direccion</label><br>
+            <input type="text" value="@Model.Cliente.Direccion" disabled>
+        </p>
+        <p>
+            <label>Letra</label><br>
+            @Html.EnumDropDownListFor(model => model.LetraFactura, "Seleccione Letra", new { @id = "LetraFactura", @required = "true" })
+        </p>
+        <p>
+            <label>Forma de Pago</label><br>
+            @Html.EnumDropDownListFor(model => model.FormaPago, "Seleccione Letra", new { @id = "LetraFactura", @required = "true" })
+        </p>
+        <p>
+            <label>Items</label><br />
+            <input type="hidden" value="" id="EspecialidadesIds" />
+            @Html.DropDownList("ItemId", null, "Seleccione Item", htmlAttributes: new { @id = "ItemId" }) <br />
+            <label>Cantidad</label><br />
+            <input type="number" min="1" step="1" id="Cantidad" value="1" />
+            <br />
+            <a class="button" href="#" onclick="agregarItem();">Agregar</a>
+        </p>
+        <p>
+            <table border="1" id="ListItems">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="ListItemsBody">
+                    <tr id='@Model.Turno.ItemId' class='Item'>
+                        <td><input type='hidden' value='@Model.Turno.ItemId' name='ItemFactura[0].ItemID' />@Model.Turno.Item.Descripcion</td>
+                        <td><input type='hidden' value='1' name='ItemFactura[0].Cantidad' />1</td>
+                        <td><input type='hidden' value='@Model.Turno.Item.Valor' name='ItemFactura[0].Precio' />@Model.Turno.Item.Valor</td>
+                        <td><input type='hidden' value='@Model.Turno.Item.Valor' name='ItemFactura[0].Total' />@Model.Turno.Item.Valor</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+        <p>
+            <label>Total</label><br>
+            <input type="text" id="Total" disabled value="@Model.Turno.Item.Valor">
+            <input type="hidden" name="Importe" id="Importe" value="@Model.Turno.Item.Valor" />
+        </p>
+        <p>
+            <input class="button" type="submit" value="Facturar" />
+        </p>
+    </form>
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/js/Facturacion.js"></script>
+}
+
+<script language="javascript" type="text/javascript">
+    function agregarItem() {
+
+        var id = document.getElementById("ItemId").value;
+        var cantidad = document.getElementById("Cantidad").value;
+            var name = $("#ItemId option:selected").text();
+            var esta = false;
+            if (validarItem(id)) {
+                esta = true;
+            }
+            if (id == "") {
+                alert("Seleccione Item");
+            }
+            else if (esta) {
+                alert("La Item seleccionada ya se encuentra cargado");
+            }
+            else if (cantidad == "") {
+                alert("Ingrese Cantidad");
+            }
+            else {
+
+
+                var url = '/Facturacion/GetImporte?ItemId=';
+                $.get(url + id, function (data)
+                {
+                    var precio = data;
+
+                    if(precio > 0)
+                    {
+                        var total = parseFloat(cantidad) * parseFloat(precio);
+                        @{
+                            Model.ItemFactura.Add(new ItemFactura());
+                        }
+
+                        var indexEsp = $("#ListItemsBody").children("tr").length;
+                        $("#ListItems > tbody").append("<tr id='" + id + "'  class='Item'><td><input type='hidden' value='" + id + "' name ='ItemFactura[" + indexEsp + "].ItemID' />" + name + "</td><td><input type='hidden' value='" + cantidad + "' name ='ItemFactura[" + indexEsp + "].Cantidad' />" + cantidad + "</td><td><input type='hidden' value='" + precio.replace('.', ',') + "' name ='ItemFactura[" + indexEsp + "].Precio' />" + precio.replace('.', ',') + "</td><td><input type='hidden' value='" + total.toString().replace('.', ',') + "' name ='ItemFactura[" + indexEsp + "].Total' />" + total.toString().replace('.', ',') + "</td><td><a href='#' class='borrar'>Eliminar</a></td></tr>");
+                        document.getElementById("ItemId").value = "";
+                        document.getElementById("Cantidad").value = "1";
+                        sumarItems();
+                    }
+                });
+
+            }
+        }
+
+        $("#ListItems").on('click', '.borrar', function () {
+            $(this).parent().parent().remove();
+            sumarItems();
+
+        });
+
+
+</script>

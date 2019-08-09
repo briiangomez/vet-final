@@ -1,0 +1,39 @@
+﻿@model Vet_Data.Models.Medico
+
+@{
+    ViewBag.Title = "Eliminar Medico";
+}
+
+<div class="form">
+
+    <h2>Eliminar Medico</h2>
+
+    <form action="/Medicos/Delete" method="post">
+        <input type="hidden" name="id" value="@Model.ID" />
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" disabled value="@Model.Nombre">
+        </p>
+        <p>
+            <label>Apellido</label><br>
+            <input type="text" disabled value="@Model.Apellido">
+        </p>
+        <p>
+            <label>Fecha de Nacimiento</label><br>
+            <input type="text" class="fecha" disabled value="@Model.FechaNacimiento">
+        </p>
+        <p>
+            <label>Matricula</label><br>
+            <input type="text" disabled value="@Model.Matricula">
+        </p>
+        <p>
+            <label>Nro de Documento</label><br>
+            <input type="number" disabled name="NroDocumento" value="@Model.NroDocumento">
+        </p>
+        <p>
+            <input class="button" type="submit" value="Eliminar" />
+        </p>
+    </form>
+
+
+</div>

@@ -1,0 +1,41 @@
+﻿@model Vet_Data.Models.Item
+
+@{
+    ViewBag.Title = "Crear Item";
+}
+
+<div class="form">
+
+    <h2>Crear Item</h2>
+
+    <form action="/Items/Create" method="post">
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" name="Descripcion">
+            @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <label>Valor</label><br>
+            <input type="number" name="Valor">
+            @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Tipo</label><br>
+            @Html.EnumDropDownListFor(model => model.Tipo, "Seleccione un Tipo" , htmlAttributes: new { @class = "" })
+            @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <input class="button" type="submit" value="Agregar" />
+        </p>
+    </form>
+
+
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

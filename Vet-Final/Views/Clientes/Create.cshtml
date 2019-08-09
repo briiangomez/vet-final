@@ -1,0 +1,58 @@
+﻿@model Vet_Core.ViewModels.ClienteVM
+
+@{
+    ViewBag.Title = "Crear Cliente";
+}
+
+<div class="form">
+
+    <h2>Crear Cliente</h2>
+
+    <form action="/Clientes/Create" method="post">
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" name="Nombre" value="@(Model != null ? Model.Nombre : "")">
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <label>Apellido</label><br>
+            <input type="text" name="Apellido"  value="@(Model != null ? Model.Apellido  : "")">
+            @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <label>Fecha de Nacimiento</label><br>
+            <input type="text" class="fecha" name="FechaNacimiento"  value="@(Model != null && Model.FechaNacimiento != null ? Model.FechaNacimiento.ToShortDateString()  : "")">
+            @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "ErrorMsj" })
+
+
+        </p>
+        <p>
+            <label>Direccion</label><br>
+            <input type="text" name="Direccion"  value="@(Model != null ? Model.Direccion : "")">
+            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "ErrorMsj" })
+
+
+        </p>
+        <p>
+            <label>Localidad</label><br>
+            <input type="text" name="Localidad"  value="@(Model != null ? Model.Localidad : "")">
+            @Html.ValidationMessageFor(model => model.Localidad, "", new { @class = "ErrorMsj" })
+
+
+        </p>
+        <p>
+            <label>Nro de Documento</label><br>
+            <input type="number" name="NroDocumento"  value="@(Model != null  && Model.NroDocumento > 0 ? Model.NroDocumento.ToString() : "")">
+            @Html.ValidationMessageFor(model => model.NroDocumento, "", new { @class = "ErrorMsj" })
+        </p>
+        <p>
+            <input class="button" type="submit" value="Agregar" />
+        </p>
+    </form>
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

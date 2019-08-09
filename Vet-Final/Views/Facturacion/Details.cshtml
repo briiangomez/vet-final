@@ -1,0 +1,67 @@
+﻿@model Vet_Data.Models.Factura
+
+@{
+    ViewBag.Title = "Detalle de Factura";
+}
+
+<div class="form">
+
+    <h2>Detalle de Factura</h2>
+
+    <p>
+        <label>Nombre</label><br>
+        <input type="text" value="@Model.Cliente.NombreCompleto" disabled>
+        <input type="hidden" name="ClienteId" value="@Model.Cliente.Id">
+        <input type="hidden" name="TurnoId" value="@Model.Turno.ID">
+    </p>
+    <p>
+        <label>DNI</label><br>
+        <input type="text" value="@Model.Cliente.NroDocumento" disabled>
+    </p>
+    <p>
+        <label>Direccion</label><br>
+        <input type="text" value="@Model.Cliente.Direccion" disabled>
+    </p>
+    <p>
+        <label>Letra</label><br>
+        <input type="text" value="@Model.LetraFactura" disabled>   
+     </p>
+    <p>
+        <label>Forma de Pago</label><br>
+        <input type="text" value="@Model.FormaPago" disabled>
+    </p>
+    <p>
+        <label>Items</label><br />
+    </p>
+    <p>
+        <table border="1" id="ListItems">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="ListItemsBody">
+                    @{ 
+                        foreach (var item in Model.ItemFactura)
+                        {
+                           <tr>
+                               <th>@item.Item.Descripcion</th>
+                               <th>@item.Cantidad</th>
+                               <th>@item.Precio</th>
+                               <th>@item.Total</th>
+                           </tr>
+                               
+                        }
+                    }
+            </tbody>
+        </table>
+    </p>
+    <p>
+        <label>Total</label><br>
+        <input type="text" id="Total" disabled value="@Model.Importe">
+    </p>
+
+</div>

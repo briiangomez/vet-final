@@ -1,0 +1,37 @@
+﻿@model Vet_Data.Models.Sala
+
+
+@{
+    ViewBag.Title = "Editar Sala";
+}
+
+<div class="form">
+
+    <h2>Editar Sala</h2>
+
+    <form action="/Salas/Edit" method="post">
+        <input type="hidden" name="ID" value="@Model.ID" />
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" name="Nombre" value="@Model.Nombre">
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Ubicacion</label><br>
+            <input type="text" name="Locacion" value="@Model.Locacion">
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <input class="button" type="submit" value="Editar" />
+        </p>
+    </form>
+
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

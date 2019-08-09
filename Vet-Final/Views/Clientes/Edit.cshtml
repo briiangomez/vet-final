@@ -1,0 +1,60 @@
+﻿@model Vet_Core.ViewModels.ClienteVM
+
+@{
+    ViewBag.Title = "Editar Cliente";
+}
+
+<div class="form">
+
+    <h2>Editar Cliente</h2>
+
+    <form action="/Clientes/Edit" method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <p>
+            <label>Nombre</label><br>
+            <input type="text" name="Nombre" value="@Model.Nombre">
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Apellido</label><br>
+            <input type="text" name="Apellido" value="@Model.Apellido">
+            @Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Fecha de Nacimiento</label><br>
+            <input type="text" class="fecha" name="FechaNacimiento" value="@Model.FechaNacimiento">
+            @Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Direccion</label><br>
+            <input type="text" name="Direccion" value="@Model.Direccion">
+            @Html.ValidationMessageFor(model => model.Direccion, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Localidad</label><br>
+            <input type="text" name="Localidad" value="@Model.Localidad">
+            @Html.ValidationMessageFor(model => model.Localidad, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <label>Nro de Documento</label><br>
+            <input type="number" maxlength="13" name="NroDocumento" value="@Model.NroDocumento">
+            @Html.ValidationMessageFor(model => model.NroDocumento, "", new { @class = "ErrorMsj" })
+
+        </p>
+        <p>
+            <input class="button" type="submit" value="Editar" />
+        </p>
+    </form>
+
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
